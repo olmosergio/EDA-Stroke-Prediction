@@ -1,52 +1,49 @@
-# 🚀 Proyecto: Análisis Predictivo de Ictus (EDA)
 
-Análisis Exploratorio de Datos (EDA) sobre el dataset "Stroke Prediction" de Kaggle para identificar los factores de riesgo clave asociados a los accidentes cerebrovasculares.
+# 🚀 Project: Stroke Prediction (EDA)
 
-![1763196614566](image/README/1763196614566.png "Matriz de Correlación")
+An Exploratory Data Analysis (EDA) on Kaggle's "Stroke Prediction" dataset to identify key risk factors associated with cerebrovascular accidents.
+
+![1763200202221](image/README/1763200202221.png)
 
 ---
 
-### 1. Contexto del Problema
+### 1. Problem Context
 
-El objetivo de este proyecto es analizar un conjunto de datos de pacientes para entender qué variables (demográficas, de estilo de vida y médicas) tienen una mayor correlación o impacto en la probabilidad de sufrir un ictus.
+The objective of this project is to analyze a patient dataset to understand which variables (demographic, lifestyle, and medical) have the highest correlation or impact on the probability of suffering a stroke.
 
-### 2. Fases del Análisis
+### 2. Analysis Phases
 
-1. **Limpieza de Datos:**
+1. **Data Cleaning:**
+   * Identified null values in the `bmi` column (approx. 3% of the data).
+   * Decided to **impute** these values using the **median** instead of the mean to avoid the influence of outliers.
+2. **Univariate Analysis (Per Variable):**
+   * **Critical Imbalance:** A severe imbalance was detected in the target variable (`stroke`): less than 5% of patients suffered a stroke.
+   * **Distributions:** `age` is left-skewed (more elderly patients), while `bmi` and `avg_glucose_level` are right-skewed.
+   * **Key Finding:** `avg_glucose_level` shows a  **bimodal distribution** , suggesting two distinct population groups (healthy patients and hyperglycemic patients).
+3. **Bivariate Analysis (Relationship with Stroke):**
+   * Categorical variables (like `smoking_status`) were analyzed using proportions (100% fill plots) to avoid erroneous conclusions due to the data imbalance.
+   * Confirmed that `age`, `hypertension`, and `heart_disease` are the strongest individual predictors.
+4. **Encoding and Correlation Matrix:**
+   * Applied **Label Encoding** to binary variables (e.g., `ever_married`) and **One-Hot Encoding** to multi-category variables (e.g., `work_type`).
+   * The final correlation matrix confirmed that **no single variable** has "magical" predictive power. Stroke risk is a  **complex combination of multiple factors** .
 
-   * Se identificaron valores nulos en la columna `bmi` (aprox. 3% de los datos).
-   * Se decidió **imputar** estos valores usando la **mediana** en lugar de la media para evitar la influencia de valores atípicos (outliers).
-2. **Análisis Univariable (Por Variable):**
+### 3. Key Findings (Insights)
 
-   * **Desbalance Crítico:** Se detectó un fuerte desbalance en la variable objetivo (`stroke`): menos del 5% de los pacientes sufrieron un ictus.
-   * **Distribuciones:** `age` está sesgada a la izquierda (más pacientes mayores), mientras `bmi` y `avg_glucose_level` están sesgadas a la derecha.
-   * **Hallazgo Clave:** `avg_glucose_level` presenta una distribución **bimodal**, sugiriendo dos grupos de población (pacientes sanos y pacientes con hiperglucemia).
-3. **Análisis Bivariable (Relación con Ictus):**
+* **Imbalance is the Challenge:** Any future model must be trained by handling this imbalance (e.g., with techniques like SMOTE or by adjusting class weights).
+* **Age is the #1 Factor:** `age` is, by far, the variable with the highest correlation (0.25).
+* **Combined Risk Factors:** Hypertension, heart disease, and high glucose levels are clear risk factors.
 
-   * Se analizaron las variables categóricas (como `smoking_status`) usando proporciones (gráficos de relleno al 100%) para evitar conclusiones erróneas debidas al desbalance.
-   * Se confirmó que `age`, `hypertension`, y `heart_disease` son los predictores individuales más fuertes.
-4. **Codificación y Matriz de Correlación:**
+### 4. Next Steps
 
-   * Se aplicó **Label Encoding** a variables binarias (ej. `ever_married`) y **One-Hot Encoding** a variables multicategoría (ej. `work_type`).
-   * La matriz de correlación final confirmó que **ninguna variable individual** tiene un poder predictivo "mágico". El riesgo de ictus es una **combinación compleja de múltiples factores**.
+The logical next step after this EDA is to build a Machine Learning model. The pre-processing would include:
 
-### 3. Hallazgos Clave (Insights)
+1. Scaling numerical variables (`StandardScaler`).
+2. Handling the imbalance (`SMOTE`).
+3. Training classification models (Logistic Regression, Random Forest...).
 
-* **El Desbalance es el Reto:** Cualquier modelo futuro deberá ser entrenado manejando este desbalance (ej. con técnicas como SMOTE o cambiando el peso de las clases).
-* **La Edad es el Factor Nº1:** `age` es, con diferencia, la variable con mayor correlación (0.25).
-* **Factores de Riesgo Combinados:** La hipertensión, las enfermedades cardíacas y los niveles altos de glucosa son claros factores de riesgo.
-
-### 4. Próximos Pasos
-
-El siguiente paso lógico tras este EDA es construir un modelo de Machine Learning. El pre-procesamiento incluiría:
-
-1. Escalado de variables numéricas (`StandardScaler`).
-2. Manejo del desbalance (`SMOTE`).
-3. Entrenamiento de modelos de clasificación (Regresión Logística, Random Forest...).
-
-### 5. Tecnologías Utilizadas
+### 5. Technologies Used
 
 * Python
-* Pandas (Manipulación de datos)
-* Matplotlib & Seaborn (Visualización)
+* Pandas (Data Manipulation)
+* Matplotlib & Seaborn (Visualization)
 * Jupyter Notebook
